@@ -1,0 +1,89 @@
+#I have add some unnecessary steps (ye code aur bhi chota ho sakta hain) 
+from tkinter import *
+from PIL import ImageTk,Image
+from sklearn import datasets
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
+a = datasets.load_iris()
+b = []
+c = []
+d = []
+b1 = []
+b2 = []
+b3 = []
+b4 = []
+c1 = []
+c2 = []
+c3 = []
+c4 = []
+d1 = []
+d2 = []
+d3 = []
+d4 = []
+y = a["data"]
+y1 = a["data"][:,3:]
+e = []
+h = []
+x1 = (a["target"] == 0).astype(int)
+x2 = (a["target"] == 1).astype(int)
+x3 = (a["target"] == 2).astype(int)
+f = LogisticRegression()
+f.fit(y,x1)
+f1 = LogisticRegression()
+f1.fit(y,x1)
+p = LogisticRegression()
+p.fit(y1,x3)
+screen = Tk()
+screen.geometry("1053x633")
+screen.configure(background="#ececec")
+def click():#click function, we will get user info and predict those to determine whether species are setosa, versicolor or virginica
+    a = user.get()
+    b = user1.get()
+    c = user2.get()
+    d = user3.get()
+    r = f1.predict([[float(a),float(b),float(c),float(d)]])
+    if r == [1]:
+        Label(screen,text="versicolor",fg="violet",bg="#ececec",font="Tahoma 16").place(x=700,y=224)
+
+    if r == [0]:
+        Label(screen,text="setosa",fg="violet",bg="#ececec",font="Tahoma 16").place(x=700,y=224)
+
+    if r == [2]:
+        Label(screen, text="virginica", fg="violet", bg="#ececec",font="Tahoma 16").place(x=700, y=224)
+img = Image.open('C:\\Users\\Dell\\OneDrive\\Desktop\\icons\\iris_page.jpg')
+i1 = ImageTk.PhotoImage(img)
+imgLabel = Label(screen,image=i1,border=0)
+imgLabel.image = i1
+imgLabel.place(x=0,y=0)
+Label(screen,text="Predict flower species",fg="#842fc7",bg="#ececec",font="Tahoma 24").place(x=400,y=94)
+Label(screen,text="______________________________________",fg="#cbcbcb",bg="#ececec",font="ariel 15 bold").place(x=401,y=136)
+Label(screen,text="sepal length",fg="#5e5e5e",bg="#ececec",font="Tahoma 12").place(x=400,y=184)
+user = StringVar()
+u_entry = Entry(screen,font="ariel 12 bold",bg="#c5c5c5",fg="white",textvariable=user,border=0)
+u_entry.place(x=400,y=224)
+u_entry.place(width=158,height=21)
+u_entry.delete(0,END)
+Label(screen,text="sepal width",fg="#5e5e5e",bg="#ececec",font="Tahoma 12").place(x=400,y=274)
+user1 = StringVar()
+u1_entry1 = Entry(screen,font="ariel 12 bold",bg="#c5c5c5",fg="white",textvariable=user1,border=0)
+u1_entry1.place(x=400,y=314)
+u1_entry1.place(width=158,height=21)
+u1_entry1.delete(0,END)
+Label(screen,text="petal length",fg="#5e5e5e",bg="#ececec",font="Tahoma 12").place(x=400,y=364)
+user2 = StringVar()
+u1_entry2 = Entry(screen,font="ariel 12 bold",bg="#c5c5c5",fg="white",textvariable=user2,border=0)
+u1_entry2.place(x=400,y=404)
+u1_entry2.place(width=158,height=21)
+u1_entry2.delete(0,END)
+Label(screen,text="petal width",fg="#5e5e5e",bg="#ececec",font="Tahoma 12").place(x=400,y=454)
+user3 = StringVar()
+u1_entry3 = Entry(screen,font="ariel 12 bold",bg="#c5c5c5",fg="white",textvariable=user3,border=0)
+u1_entry3.place(x=400,y=494)
+u1_entry3.place(width=158,height=21)
+u1_entry3.delete(0,END)
+Label(screen,text="name of species",fg="#5e5e5e",bg="#ececec",font="Tahoma 12 bold").place(x=700,y=184)
+btn = PhotoImage(file="Screenshot.png")
+main_btn = Button(screen,image=btn,border=0,command=click).place(x=680,y=350)
+mainloop()
+
